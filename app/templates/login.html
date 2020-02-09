@@ -4,20 +4,27 @@
 
 <h1>Sign In</h1>
 
-<!--The action attribute of the form is used to tell the browser the URL
+<!--The 'action' attribute of the form is used to tell the browser the URL
      that should be used when submitting the information the user entered 
      in the form. When the action is set to an empty string the form is 
      submitted to the URL that is currently in the address bar, which is 
      the URL that rendered the form on the page-->
+    <!--novalidate means the validation should be done by the server instead of front-end-->
 <form action="" method="post" novalidate>
     {{ form.hidden_tag() }}
     <p>
         {{ form.username.label }}<br>
         {{ form.username(size=32) }}
+        {% for error in form.username.errors %}       <!--As a general rule, any fields that have validators attached will have error messages added under form.<field_name>.errors-->
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
     </p>
     <p>
         {{ form.password.label }}<br>
         {{ form.password(size=32) }}
+        {% for error in form.password.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
     </p>
     <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
     <p>{{ form.submit() }}</p>

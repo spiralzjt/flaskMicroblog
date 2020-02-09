@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template
+from flask import render_template, flash, redirect
 from app.forms import LoginForm
 
 #修饰器decorator，when a web browser requests either of these two URLs,
@@ -22,7 +22,11 @@ def index():
     #This function takes a template filename and a variable list of template arguments and returns the same template, but with all the placeholders in it replaced with actual values.
 
 
-@app.route('/login')
+@app.route('/login', methods = ['GET', 'POST'])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        # processed in the base.html with get_flashed_messages() function
+        flash('Login request for user {}, remember_me = {}'.format(form.username.data, form.remember_me.data))
+        return redirect('/index')
     return render_template('login.html', title='Sign In', form=form)
