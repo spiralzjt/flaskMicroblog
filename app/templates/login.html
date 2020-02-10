@@ -10,6 +10,8 @@
      submitted to the URL that is currently in the address bar, which is 
      the URL that rendered the form on the page-->
     <!--novalidate means the validation should be done by the server instead of front-end-->
+
+<p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
 <form action="" method="post" novalidate>
     {{ form.hidden_tag() }}
     <p>
