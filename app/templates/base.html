@@ -49,3 +49,9 @@
         {% block app_content %}{% endblock %}
     </div>
 {% endblock %}
+
+<!-- exported by Flask-Bootstrap's base template, where Javascript imports are to be included -->
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+{% endblock %}
